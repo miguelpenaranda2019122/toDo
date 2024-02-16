@@ -1,11 +1,11 @@
-export interface Types {
+export interface Work {
     id: number,
     title: string,
     desc: string,
     check: boolean
 }
 
-export const worksListInfo: Types[] = [
+export const worksListInfo: Work[] = [
     {
         id: 1,
         title: "Personal Work No. 1",

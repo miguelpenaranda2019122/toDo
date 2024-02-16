@@ -3,7 +3,7 @@ import {
     SET_TEXTAREA_VALUE, SET_MODAL_VISIBLE
 } from './actions';
 
-import { worksListInfo } from '../services/worksListInfo';
+import { worksListInfo, Work } from '../services/worksListInfo';
 
 const initialState = {
     workList: worksListInfo,
@@ -12,7 +12,13 @@ const initialState = {
     modalVisible: false
 }
 
-function toDoReducer(state = initialState, action) {
+type ToDoAction =
+  | { type: typeof SET_WORKLIST_INFO; payload: Work[] }
+  | { type: typeof SET_TEXT_VALUE; payload: string }
+  | { type: typeof SET_TEXTAREA_VALUE; payload: string }
+  | { type: typeof SET_MODAL_VISIBLE; payload: boolean };
+
+function toDoReducer(state = initialState, action: ToDoAction ) {
     switch (action.type) {
         case SET_WORKLIST_INFO:
             return {...state, workList: action.payload };

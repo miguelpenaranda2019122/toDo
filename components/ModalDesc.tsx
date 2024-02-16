@@ -8,9 +8,9 @@ function ModalDesc(): React.JSX.Element {
     const dispatch: any = useDispatch();
 
     const addItem = () => {
-        let worksCopy = workList.slice();
+        const maxId = workList.reduce((max: number, work: {id: number}) => Math.max(max, work.id), 0);
         const newWork: any = {
-            id: worksCopy.length + 1,
+            id: maxId + 1,
             title: text,
             desc: textArea,
             check: false
