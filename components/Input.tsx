@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, TextInput, StyleSheet, TouchableOpacity, Text, Alert } from "react-native";
 import React from 'react';
 import { useAppSelector, useAppDispatch } from "../redux/hooks/useSelectorAndDispatch";
 import { setText, setModalVisible } from "../redux/slices/toDoSlice";
@@ -9,6 +9,20 @@ function Input(): React.JSX.Element {
     const text = useAppSelector(selectText);
     const modalVisible = useAppSelector(selectModalVisible);
     const dispatch = useAppDispatch();
+
+    const openModal = ()=> {
+        if (!text.trim()) {
+            Alert.alert(
+             "Title field empty",
+             "Please, fill the title field before creating a new work to do",
+             [
+                 {text: "OK"}
+             ]
+            );
+            return;
+         }
+        dispatch(setModalVisible(!modalVisible))
+    }
 
     return (
         <View style={styles.container}>
@@ -21,7 +35,7 @@ function Input(): React.JSX.Element {
             />
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => dispatch(setModalVisible(!modalVisible))}
+                onPress={openModal}
             >
                 <Text style={{ fontWeight: "bold", color: "white", fontSize: 16 }}>ADD</Text>
             </TouchableOpacity>
