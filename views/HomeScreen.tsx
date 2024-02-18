@@ -8,9 +8,9 @@ import { RootStackParamList } from "../services/types";
 
 interface HomeScreenProps {
     navigation: NavigationProp<RootStackParamList>;
-  }
+}
 
-function HomeScreen({ navigation }: HomeScreenProps ): React.JSX.Element {
+function HomeScreen({ navigation }: HomeScreenProps): React.JSX.Element {
     return (
         <ScrollView>
             <View style={{ gap: 30 }}>
@@ -19,7 +19,7 @@ function HomeScreen({ navigation }: HomeScreenProps ): React.JSX.Element {
                 <WorksSection
                     navTo={(id: number) => navigation.navigate('Details', {
                         idItem: id
-                    })} 
+                    })}
                 />
                 <ModalDesc />
             </View>
