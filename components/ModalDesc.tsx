@@ -1,15 +1,21 @@
 import { Modal, StyleSheet, Text, Pressable, View, TextInput } from 'react-native';
-import { useSelector, useDispatch } from "react-redux";
-import { setWorkList, setText, setTextArea, setModalVisible } from '../redux/actions';
+import { useAppSelector, useAppDispatch } from "../redux/hooks/useSelectorAndDispatch";
+import { selectWorkList, selectText, selectTextArea, selectModalVisible } from '../redux/slices/toDoSlice';
+import { setWorkList, setText, setTextArea, setModalVisible } from '../redux/slices/toDoSlice';
+import { WorkType } from '../services/worksListInfo';
 
 function ModalDesc(): React.JSX.Element {
 
-    const { workList, text, textArea, modalVisible } = useSelector((state: any) => state.toDoReducer);
-    const dispatch: any = useDispatch();
+    const workList = useAppSelector(selectWorkList);
+    const text = useAppSelector(selectText);
+    const textArea = useAppSelector(selectTextArea);
+    const modalVisible = useAppSelector(selectModalVisible);
+
+    const dispatch = useAppDispatch();
 
     const addItem = () => {
-        const maxId = workList.reduce((max: number, work: {id: number}) => Math.max(max, work.id), 0);
-        const newWork: any = {
+        const maxId = workList.reduce((max: number, work: { id: number }) => Math.max(max, work.id), 0);
+        const newWork: WorkType = {
             id: maxId + 1,
             title: text,
             desc: textArea,
@@ -59,7 +65,7 @@ function ModalDesc(): React.JSX.Element {
                                     borderRadius: 10
                                 }}
                                 onPress={addItem}
-                                >
+                            >
                                 <Text style={{ color: "white", fontWeight: "bold", fontSize: 20, textAlign: "center" }}>Create</Text>
                             </Pressable>
                         </View>

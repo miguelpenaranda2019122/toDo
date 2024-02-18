@@ -1,12 +1,14 @@
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from "react-native";
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { setText, setModalVisible } from "../redux/actions";
+import { useAppSelector, useAppDispatch } from "../redux/hooks/useSelectorAndDispatch";
+import { setText, setModalVisible } from "../redux/slices/toDoSlice";
+import { selectText, selectModalVisible } from '../redux/slices/toDoSlice';
 
 function Input(): React.JSX.Element {
 
-    const { text, modalVisible } = useSelector((state: any) => state.toDoReducer);
-    const dispatch: any = useDispatch();
+    const text = useAppSelector(selectText);
+    const modalVisible = useAppSelector(selectModalVisible);
+    const dispatch = useAppDispatch();
 
     return (
         <View style={styles.container}>
@@ -17,11 +19,11 @@ function Input(): React.JSX.Element {
                 onChangeText={(newText: string) => dispatch(setText(newText))}
                 defaultValue={text}
             />
-            <TouchableOpacity 
-                style={styles.button} 
-                onPress={()=> dispatch(setModalVisible(!modalVisible))}
-                >
-                <Text style={{fontWeight: "bold", color: "white", fontSize: 16}}>ADD</Text>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => dispatch(setModalVisible(!modalVisible))}
+            >
+                <Text style={{ fontWeight: "bold", color: "white", fontSize: 16 }}>ADD</Text>
             </TouchableOpacity>
         </View>
     )

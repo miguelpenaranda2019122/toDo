@@ -1,7 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import {thunk} from 'redux-thunk';
-import toDoReducer from './reducers';
+import { configureStore } from '@reduxjs/toolkit';
+import toDoReducer from './slices/toDoSlice';
 
-const rootReducer = combineReducers({ toDoReducer });
+export const Store = configureStore({ reducer: toDoReducer });
 
-export const Store = createStore(rootReducer, applyMiddleware(thunk));
+export type RootState = ReturnType<typeof Store.getState>;
+export type AppDispatch = typeof Store.dispatch;
+

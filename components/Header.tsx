@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     }
 });
 
-function Header(): React.JSX.Element{
+function Header(): React.JSX.Element {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
