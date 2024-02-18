@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 import { Store } from './redux/store';
 import HomeScreen from './views/HomeScreen';
 import DetailsScreen from './views/DetailsScreen';
+import { RootStackParamList } from './services/types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
   return (
