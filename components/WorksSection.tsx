@@ -4,12 +4,15 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks/useSelectorAndDis
 import { setWorkList } from '../redux/slices/toDoSlice';
 import { selectWorkList } from '../redux/slices/toDoSlice';
 import { WorkType } from "../services/worksListInfo";
+import { useTranslation } from 'react-i18next';
 
 type PropsTypes = {
     navTo: (id: number) => void;
 }
 
 function WorksSection(props: PropsTypes): React.JSX.Element {
+
+    const { t } = useTranslation();
 
     const workList = useAppSelector(selectWorkList);
     const dispatch = useAppDispatch();
@@ -30,7 +33,7 @@ function WorksSection(props: PropsTypes): React.JSX.Element {
     if (workList.length == 0) {
         return (
             <View style={styles.container}>
-                <Text style={{ textAlign: "center", fontWeight: "300", fontSize: 20 }}>There are not tasks</Text>
+                <Text style={{ textAlign: "center", fontWeight: "300", fontSize: 20 }}>{t("listEmptyText")}</Text>
             </View>
         );
     };
@@ -50,7 +53,7 @@ function WorksSection(props: PropsTypes): React.JSX.Element {
                                 navTo={() => props.navTo(work.id)} />))
                 }
                 <TouchableOpacity style={styles.button} onPress={() => dispatch(setWorkList([]))}>
-                    <Text style={{ color: "white", fontWeight: "bold" }}>Clear all</Text>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>{t("buttonClearText")}</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: "#D98326",
-        width: 80, padding: 8,
+        width: "auto", padding: 9,
         alignItems: "center",
         borderRadius: 10,
         alignSelf: "flex-end",

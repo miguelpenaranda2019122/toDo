@@ -3,8 +3,11 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks/useSelectorAndDis
 import { selectWorkList, selectText, selectTextArea, selectModalVisible } from '../redux/slices/toDoSlice';
 import { setWorkList, setText, setTextArea, setModalVisible } from '../redux/slices/toDoSlice';
 import { WorkType } from '../services/worksListInfo';
+import { useTranslation } from 'react-i18next';
 
 function ModalDesc(): React.JSX.Element {
+
+    const { t } = useTranslation();
 
     const workList = useAppSelector(selectWorkList);
     const text = useAppSelector(selectText);
@@ -17,8 +20,8 @@ function ModalDesc(): React.JSX.Element {
         
         if (!textArea.trim()) {
             Alert.alert(
-             "Description field empty",
-             "Please, fill the description field before creating a new work to do",
+             `${t("modalAlertTitleText")}`,
+             `${t("modalAlertDescText")}`,
              [
                  {text: "OK"}
              ]
@@ -50,11 +53,11 @@ function ModalDesc(): React.JSX.Element {
                 }}>
                 <View style={styles.container}>
                     <View style={styles.modalView}>
-                        <Text style={styles.title}>Add description</Text>
+                        <Text style={styles.title}>{t("modalTitle")}</Text>
                         <TextInput multiline={true}
                             numberOfLines={8}
                             style={styles.textarea}
-                            placeholder="Write a description..."
+                            placeholder={t("textAreaText")}
                             placeholderTextColor={"#C5C5C5"}
                             onChangeText={(someText: string) => dispatch(setTextArea(someText))}
                             defaultValue={textArea} />
@@ -67,7 +70,7 @@ function ModalDesc(): React.JSX.Element {
                                     borderRadius: 10
                                 }}
                                 onPress={() => dispatch(setModalVisible(!modalVisible))}>
-                                <Text style={{ color: "white", fontWeight: "bold", fontSize: 20, textAlign: "center" }}>Back</Text>
+                                <Text style={{ color: "white", fontWeight: "bold", fontSize: 20, textAlign: "center" }}>{t("buttonBack")}</Text>
                             </Pressable>
                             <Pressable
                                 style={{
@@ -78,7 +81,7 @@ function ModalDesc(): React.JSX.Element {
                                 }}
                                 onPress={addItem}
                             >
-                                <Text style={{ color: "white", fontWeight: "bold", fontSize: 20, textAlign: "center" }}>Create</Text>
+                                <Text style={{ color: "white", fontWeight: "bold", fontSize: 20, textAlign: "center" }}>{t("buttonCreate")}</Text>
                             </Pressable>
                         </View>
                     </View>
@@ -115,7 +118,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: "bold",
         color: "#D98326",
-        textTransform: "uppercase"
+        textTransform: "uppercase",
+        textAlign: "center"
     },
     textarea: {
         height: 200,

@@ -3,8 +3,11 @@ import React from 'react';
 import { useAppSelector, useAppDispatch } from "../redux/hooks/useSelectorAndDispatch";
 import { setText, setModalVisible } from "../redux/slices/toDoSlice";
 import { selectText, selectModalVisible } from '../redux/slices/toDoSlice';
+import { useTranslation } from 'react-i18next';
 
 function Input(): React.JSX.Element {
+    
+    const { t } = useTranslation();
 
     const text = useAppSelector(selectText);
     const modalVisible = useAppSelector(selectModalVisible);
@@ -13,8 +16,8 @@ function Input(): React.JSX.Element {
     const openModal = ()=> {
         if (!text.trim()) {
             Alert.alert(
-             "Title field empty",
-             "Please, fill the title field before creating a new work to do",
+             `${t("inputAlertTitleText")}`,
+             `${t("inputAlertDescText")}`,
              [
                  {text: "OK"}
              ]
@@ -28,7 +31,7 @@ function Input(): React.JSX.Element {
         <View style={styles.container}>
             <TextInput
                 style={styles.input}
-                placeholder="What do you need to do?"
+                placeholder={t("inputText")}
                 placeholderTextColor={"#C5C5C5"}
                 onChangeText={(newText: string) => dispatch(setText(newText))}
                 defaultValue={text}
@@ -37,7 +40,7 @@ function Input(): React.JSX.Element {
                 style={styles.button}
                 onPress={openModal}
             >
-                <Text style={{ fontWeight: "bold", color: "white", fontSize: 16 }}>ADD</Text>
+                <Text style={{ fontWeight: "bold", color: "white", fontSize: 40 }}>+</Text>
             </TouchableOpacity>
         </View>
     )
@@ -64,7 +67,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderTopRightRadius: 30,
-        borderBottomEndRadius: 30
+        borderBottomEndRadius: 30,
+        paddingRight: 3
     }
 });
 
