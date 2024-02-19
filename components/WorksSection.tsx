@@ -27,36 +27,35 @@ function WorksSection(props: PropsTypes): React.JSX.Element {
         dispatch(setWorkList(worksCopy));
     }
 
-    if (workList.length > 0) {
-        return (
-            <View>
-                <View style={styles.container}>
-                    {
-                        workList.map(
-                            (work: WorkType, index: number) => (
-                                <Work
-                                    key={work.id}
-                                    title={work.title}
-                                    check={work.check}
-                                    handleCheck={() => checkItem(index)}
-                                    deleteItem={() => deleteItem(index)}
-                                    navTo={() => props.navTo(work.id)} />))
-                    }
-                    <TouchableOpacity style={styles.button} onPress={() => dispatch(setWorkList([]))}>
-                        <Text style={{ color: "white", fontWeight: "bold" }}>Clear all</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        )
-    } else {
+    if (workList.length == 0) {
         return (
             <View style={styles.container}>
                 <Text style={{ textAlign: "center", fontWeight: "300", fontSize: 20 }}>There are not tasks</Text>
             </View>
-        )
-    }
+        );
+    };
 
-}
+    return (
+        <View>
+            <View style={styles.container}>
+                {
+                    workList.map(
+                        (work: WorkType, index: number) => (
+                            <Work
+                                key={work.id}
+                                title={work.title}
+                                check={work.check}
+                                handleCheck={() => checkItem(index)}
+                                deleteItem={() => deleteItem(index)}
+                                navTo={() => props.navTo(work.id)} />))
+                }
+                <TouchableOpacity style={styles.button} onPress={() => dispatch(setWorkList([]))}>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>Clear all</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    )
+};
 
 const styles = StyleSheet.create({
     container: {

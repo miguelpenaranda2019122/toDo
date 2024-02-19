@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import Header from '../components/Header';
 import { useAppSelector } from "../redux/hooks/useSelectorAndDispatch";
-import { selectWorkList } from '../redux/slices/toDoSlice';
-import { WorkType } from "../services/worksListInfo";
 import { DetailsScreenRouteProp } from '../services/types';
 
 type PropsTypes = {
@@ -12,16 +10,14 @@ type PropsTypes = {
 function DetailsScreen({ route }: PropsTypes): React.JSX.Element {
     const { idItem } = route.params;
 
-    const workList = useAppSelector(selectWorkList);
-
-    const item = workList.filter((work: WorkType) => work.id === idItem)[0];
-
+    const workList = useAppSelector(state => state.workList.find(work => work.id === idItem));
+    
     return (
         <View style={{ gap: 30 }}>
             <Header />
             <View style={styles.container}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text>{item.desc}</Text>
+                <Text style={styles.title}>{workList?.title}</Text>
+                <Text>{workList?.desc}</Text>
             </View>
         </View>
     )
