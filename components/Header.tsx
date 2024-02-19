@@ -1,4 +1,16 @@
 import { View, Text, StyleSheet } from "react-native";
+import { useTranslation } from 'react-i18next';
+
+function Header(): React.JSX.Element {
+    const { t } = useTranslation();
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>
+                {t('headerTitle')}
+            </Text>
+        </View>
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -13,15 +25,5 @@ const styles = StyleSheet.create({
         color: "#D98326"
     }
 });
-
-function Header(): React.JSX.Element {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
-                TO DO
-            </Text>
-        </View>
-    )
-}
 
 export default Header;
