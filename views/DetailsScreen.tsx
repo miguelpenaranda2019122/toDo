@@ -1,14 +1,28 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Header from '../components/Header';
 import { useAppSelector } from "../redux/hooks/useSelectorAndDispatch";
 import { DetailsScreenRouteProp } from '../services/types';
+import { useLayoutEffect } from "react";
+import { NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from "../services/types";
 
-type PropsTypes = {
+interface DetailsScreenProps {
     route: DetailsScreenRouteProp
+    navigation: NavigationProp<RootStackParamList>;
 }
 
-function DetailsScreen({ route }: PropsTypes): React.JSX.Element {
+function DetailsScreen({ route, navigation }: DetailsScreenProps): React.JSX.Element {
     const { idItem } = route.params;
+
+    useLayoutEffect(()=> {
+        navigation.setOptions({
+            headerRight: () => (
+              <TouchableOpacity onPress={()=> navigation.navigate('ChangeLanguage')}>
+                <Image source={{ uri: 'https://image.similarpng.com/very-thumbnail/2020/12/Google-translate-icon-design-on-transparent-background-PNG.png' }} style={{ width: 30, height: 30 }}/>
+              </TouchableOpacity>
+            ),
+          });
+    }, [navigation]);
 
     const workList = useAppSelector(state => state.workList.find(work => work.id === idItem));
     
