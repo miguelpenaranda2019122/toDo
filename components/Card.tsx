@@ -13,7 +13,7 @@ function Card(props: PropsType): React.JSX.Element {
     return (
         <View >
             <TouchableOpacity style={[styles.card, props.check && {backgroundColor: "#cccccc"}]} onPress={props.onPress}>
-                <Text style={[styles.text, props.check && {fontWeight: "bold"}]}>{props.flag} {props.lang.toLocaleUpperCase()} - {props.name} {props.check ? "✓" : ""}</Text>
+                <Text style={[styles.text, props.check && {fontWeight: "bold"}]}>{props.flag} {props.lang.toLocaleUpperCase()} - {props.name} <Text style={{color: "#0dbe00"}}>{props.check ? "✓" : ""}</Text></Text>
             </TouchableOpacity>
         </View>
     )
