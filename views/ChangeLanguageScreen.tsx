@@ -1,9 +1,15 @@
 import { View } from "react-native";
 import { useTranslation } from 'react-i18next';
 import Card from "../components/Card";
+import { NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from "../services/types";
+
+interface HomeScreenProps {
+    navigation: NavigationProp<RootStackParamList>;
+}
 
 
-function ChangeLanguageScreen(): React.JSX.Element {
+function ChangeLanguageScreen({ navigation }: HomeScreenProps): React.JSX.Element {
 
     const { t, i18n } = useTranslation();
     const selectedLanguageCode = i18n.resolvedLanguage;
@@ -21,6 +27,7 @@ function ChangeLanguageScreen(): React.JSX.Element {
                     <Card
                         onPress={() => {
                             i18n.changeLanguage(lang.label);
+                            navigation.navigate('Home');
                         }}
                         check={lang.label === selectedLanguageCode}
                         name={lang.name}
