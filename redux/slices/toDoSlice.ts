@@ -9,7 +9,7 @@ type toDoState = {
     modalVisible: boolean
 }
 
-const initialState : toDoState = {
+const initialState: toDoState = {
     workList: worksListInfo,
     text: '',
     textArea: '',
@@ -23,13 +23,13 @@ export const toDoSlice = createSlice({
         setWorkList: (state, action: PayloadAction<WorkType[]>) => {
             state.workList = action.payload;
         },
-        setText: (state, action: PayloadAction<string>) =>{
+        setText: (state, action: PayloadAction<string>) => {
             state.text = action.payload;
         },
-        setTextArea: (state, action: PayloadAction<string>) =>{
+        setTextArea: (state, action: PayloadAction<string>) => {
             state.textArea = action.payload;
         },
-        setModalVisible: (state, action: PayloadAction<boolean>) =>{
+        setModalVisible: (state, action: PayloadAction<boolean>) => {
             state.modalVisible = action.payload;
         }
     }
@@ -39,9 +39,9 @@ export const toDoSlice = createSlice({
 export const { setWorkList, setText, setTextArea, setModalVisible } = toDoSlice.actions;
 
 export const selectWorkList = (state: RootState) => state.workList;
-export const selectText = (state: RootState ) => state.text;
-export const selectTextArea = (state: RootState ) => state.textArea;
-export const selectModalVisible= (state:RootState ) => state.modalVisible;
+export const selectText = (state: RootState) => state.text;
+export const selectTextArea = (state: RootState) => state.textArea;
+export const selectModalVisible = (state: RootState) => state.modalVisible;
 
 export default toDoSlice.reducer;
 

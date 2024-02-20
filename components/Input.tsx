@@ -6,24 +6,24 @@ import { selectText, selectModalVisible } from '../redux/slices/toDoSlice';
 import { useTranslation } from 'react-i18next';
 
 function Input(): React.JSX.Element {
-    
+
     const { t } = useTranslation();
 
     const text = useAppSelector(selectText);
     const modalVisible = useAppSelector(selectModalVisible);
     const dispatch = useAppDispatch();
 
-    const openModal = ()=> {
+    const openModal = () => {
         if (!text.trim()) {
             Alert.alert(
-             `${t("inputAlertTitleText")}`,
-             `${t("inputAlertDescText")}`,
-             [
-                 {text: "OK"}
-             ]
+                `${t("inputAlertTitleText")}`,
+                `${t("inputAlertDescText")}`,
+                [
+                    { text: "OK" }
+                ]
             );
             return;
-         }
+        }
         dispatch(setModalVisible(!modalVisible))
     }
 

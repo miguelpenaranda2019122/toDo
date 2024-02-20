@@ -13,14 +13,14 @@ interface HomeScreenProps {
 
 function HomeScreen({ navigation }: HomeScreenProps): React.JSX.Element {
 
-    useLayoutEffect(()=> {
+    useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-              <TouchableOpacity onPress={()=> navigation.navigate('ChangeLanguage')}>
-                <Image source={{ uri: 'https://image.similarpng.com/very-thumbnail/2020/12/Google-translate-icon-design-on-transparent-background-PNG.png' }} style={{ width: 30, height: 30 }}/>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('ChangeLanguage')}>
+                    <Image source={{ uri: 'https://image.similarpng.com/very-thumbnail/2020/12/Google-translate-icon-design-on-transparent-background-PNG.png' }} style={{ width: 30, height: 30 }} />
+                </TouchableOpacity>
             ),
-          });
+        });
     }, [navigation]);
 
     return (

@@ -14,18 +14,18 @@ interface DetailsScreenProps {
 function DetailsScreen({ route, navigation }: DetailsScreenProps): React.JSX.Element {
     const { idItem } = route.params;
 
-    useLayoutEffect(()=> {
+    useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-              <TouchableOpacity onPress={()=> navigation.navigate('ChangeLanguage')}>
-                <Image source={{ uri: 'https://image.similarpng.com/very-thumbnail/2020/12/Google-translate-icon-design-on-transparent-background-PNG.png' }} style={{ width: 30, height: 30 }}/>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('ChangeLanguage')}>
+                    <Image source={{ uri: 'https://image.similarpng.com/very-thumbnail/2020/12/Google-translate-icon-design-on-transparent-background-PNG.png' }} style={{ width: 30, height: 30 }} />
+                </TouchableOpacity>
             ),
-          });
+        });
     }, [navigation]);
 
     const workList = useAppSelector(state => state.workList.find(work => work.id === idItem));
-    
+
     return (
         <View style={{ gap: 30 }}>
             <Header />

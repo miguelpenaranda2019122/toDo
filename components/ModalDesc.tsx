@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, Text, Pressable, View, TextInput, Alert} from 'react-native';
+import { Modal, StyleSheet, Text, Pressable, View, TextInput, Alert } from 'react-native';
 import { useAppSelector, useAppDispatch } from "../redux/hooks/useSelectorAndDispatch";
 import { selectWorkList, selectText, selectTextArea, selectModalVisible } from '../redux/slices/toDoSlice';
 import { setWorkList, setText, setTextArea, setModalVisible } from '../redux/slices/toDoSlice';
@@ -17,17 +17,17 @@ function ModalDesc(): React.JSX.Element {
     const dispatch = useAppDispatch();
 
     const addItem = () => {
-        
+
         if (!textArea.trim()) {
             Alert.alert(
-             `${t("modalAlertTitleText")}`,
-             `${t("modalAlertDescText")}`,
-             [
-                 {text: "OK"}
-             ]
+                `${t("modalAlertTitleText")}`,
+                `${t("modalAlertDescText")}`,
+                [
+                    { text: "OK" }
+                ]
             );
             return;
-         }
+        }
 
         const maxId = workList.reduce((max: number, work: { id: number }) => Math.max(max, work.id), 0);
         const newWork: WorkType = {
