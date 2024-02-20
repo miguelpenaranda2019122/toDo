@@ -22,7 +22,7 @@ i18n
         debug: true,
         fallbackLng: 'en',
         interpolation: {
-            escapeValue: false,
+            escapeValue: false, /* Desactivar el escapeValue puede ser peligroso, pues posibilita el hecho de recibir un ataque XSS attacks */
         },
         resources
     });
